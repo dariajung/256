@@ -2,13 +2,8 @@
 class Game {
     board: number[];
 
-    constructor(initBoard?: string) {
-        if (initBoard) {
-            this.board = _.map(initBoard.split(''), function(num) { return parseInt(num); });
-        } else {
-            // default if nothing passed in
-            this.board = _.map('0000202000000000'.split(''), function(num) { return parseInt(num); });
-        }
+    constructor(initBoard = '0000202000000000') {
+        this.board = _.map(initBoard.split(''), function(num) { return parseInt(num); });
     }
 
     toString() {
@@ -39,7 +34,6 @@ class Game {
             }
 
             console.log(chunked);
-
 
         } else if (move === 'right' || move === 'left') {
 
