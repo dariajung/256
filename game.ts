@@ -1,21 +1,22 @@
 
 class Game {
-    board: string;
+    board: number[];
 
     constructor(initBoard?: string) {
         if (initBoard) {
-            this.board = initBoard;
+            this.board = _.map(initBoard.split(''), function(num) { return parseInt(num); });
         } else {
             // default if nothing passed in
-            this.board = '0000202000000000';
+            this.board = _.map('0000202000000000'.split(''), function(num) { return parseInt(num); });
         }
     }
 
     toString() {
-        var split: number = 0;
         var strBoard: string = '';
-        for (split; split <= this.board.length; split += 4) {
-            strBoard += this.board.substring(split, split + 4) + '\n';
+
+        for (var i = 0; i < this.board.length; i += 4) {
+            strBoard += this.board.slice(i, i + 4).toString().split(',').join('');
+            strBoard += "\n";
         }
 
         return strBoard;
@@ -27,13 +28,14 @@ class Game {
 
         // probably a better way?
         var chunked;
+        var newBoard;
 
         if (move === 'up' || move === 'down') {
 
             chunked = [[], [], [], []];
 
             for (var i = 0; i < this.board.length; i++) {
-                chunked[i % 4].push(this.board[i]);
+                chunked[i % 4].push(parseInt(this.board[i]));
             }
 
             console.log(chunked);
@@ -41,7 +43,8 @@ class Game {
 
         } else if (move === 'right' || move === 'left') {
 
-            var copy = this.board.split('');
+            var copy = this.board;
+            copy = _.map(copy, function(num) { return parseInt(num); });
             chunked = [];
 
             while (copy.length) {
@@ -52,12 +55,27 @@ class Game {
         }
 
         for (var i = 0; i < chunked.length; i++) {
-            for (var j = 0; j < chunked[i].length; j++) {
-                
+            for (var j = 0; j < chunked[i].length - 1; j++) {
+                // satisfies requisites for moving current block over one unit
+                if (chunked[i][j] === chunked[i][j + 1] || chunked[i][j + 1] === 0) {
+                    chunked[i][j + 1] = chunked[i][j + 1] + chunked[i][j];
+                    chunked[i][j] = 0;
+                }
             }
         }
 
-        //this.spawnBlock();
+        if (move === 'up' || move === 'down') {
+            chunked = _.zip.apply(_, chunked);
+        }
+
+        newBoard = _.flatten(chunked);
+
+        if (move === 'up' || move === 'left') {
+            newBoard.reverse();
+        }
+
+        this.board = newBoard;
+        this.spawnBlock();
     }
 
     spawnBlock() {
@@ -65,11 +83,11 @@ class Game {
         var spawn: number;
         var newBoard: string;
 
-        _.filter(this.board, function(char, index) { 
-                if (char === '0') {
-                    zeroes.push(index);
-                }
-            });
+        _.filter(this.board, function(char, index) {
+            if (char === 0) {
+                zeroes.push(index);
+            }
+        });
 
         if (zeroes.length < 1) {
             /* no blocks can be spawned because
@@ -78,8 +96,7 @@ class Game {
         }
 
         spawn = zeroes[_.random(zeroes.length - 1)];
-        newBoard = this.board.substring(0, spawn) + '2' + this.board.substring(spawn + 1);
-        this.board = newBoard;
+        this.board[spawn] = 2;
     }
 }
 
