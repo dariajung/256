@@ -18,9 +18,7 @@ class Game {
     }
 
     move(move: string) {
-
         // up, down, left, right
-
         // probably a better way?
         var chunked;
         var newBoard;
@@ -78,7 +76,6 @@ class Game {
     spawnBlock() {
         var zeroes: number[] = [];
         var spawn: number;
-        var newBoard: string;
 
         _.filter(this.board, function(char, index) {
             if (char === 0) {
