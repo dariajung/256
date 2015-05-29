@@ -1,3 +1,4 @@
+/// <reference path="typings/underscore.d.ts" />
 
 class Game {
     board: number[];
@@ -28,7 +29,7 @@ class Game {
             chunked = [[], [], [], []];
 
             for (var i = 0; i < this.board.length; i++) {
-                chunked[i % 4].push(parseInt(this.board[i]));
+                chunked[i % 4].push(this.board[i]);
             }
 
             console.log(chunked);
@@ -36,7 +37,7 @@ class Game {
         } else if (move === 'right' || move === 'left') {
 
             var copy = this.board;
-            copy = _.map(copy, function(num) { return parseInt(num); });
+            copy = _.map(copy, function(num) { return num; });
             chunked = [];
 
             while (copy.length) {

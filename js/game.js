@@ -1,3 +1,4 @@
+/// <reference path="typings/underscore.d.ts" />
 var Game = (function () {
     function Game(initBoard) {
         if (initBoard === void 0) { initBoard = '0000202000000000'; }
@@ -19,13 +20,13 @@ var Game = (function () {
         if (move === 'up' || move === 'down') {
             chunked = [[], [], [], []];
             for (var i = 0; i < this.board.length; i++) {
-                chunked[i % 4].push(parseInt(this.board[i]));
+                chunked[i % 4].push(this.board[i]);
             }
             console.log(chunked);
         }
         else if (move === 'right' || move === 'left') {
             var copy = this.board;
-            copy = _.map(copy, function (num) { return parseInt(num); });
+            copy = _.map(copy, function (num) { return num; });
             chunked = [];
             while (copy.length) {
                 chunked.push(copy.splice(0, 4));
@@ -57,7 +58,6 @@ var Game = (function () {
     Game.prototype.spawnBlock = function () {
         var zeroes = [];
         var spawn;
-        var newBoard;
         _.filter(this.board, function (char, index) {
             if (char === 0) {
                 zeroes.push(index);

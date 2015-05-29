@@ -1,0 +1,11 @@
+{
+  "name": "256",
+  "version": "0.0.0",
+  "description": "A (smaller) copy of 2048.",
+  "main": "Gruntfile.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "grunt-contrib-uglify": "*"
+  }
+}
