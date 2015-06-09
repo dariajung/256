@@ -9,7 +9,7 @@ module.exports = function(grunt) {
                 sourceMapName : 'sourceMap.map'
             },
             files : {
-                'bundle.min.js' : ['underscore.js', 'game.js']
+                'js/bundle.min.js' : ['libs/underscore.js', '256/game.js']
             }
         }
     }
