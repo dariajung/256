@@ -39,7 +39,7 @@ The Google Closure compiler. Included for convenience.
 
 **Underscore.js**
 
-[Underscore.js](http://underscorejs.org/) is a dependency to running `game.js`. It can be included in the header of the `index.html` if you wish to run the game without bundling `underscore.js` and `game.js` into `bundle.closure.js`. 
+[Underscore.js](http://underscorejs.org/) is a dependency to running `game.js`. It can be included in the header of the `index.html` if you wish to run the game without bundling `underscore.js` and `game.js` into `bundle.closure.js`.
 
 #### Bundling
 
@@ -80,3 +80,6 @@ The current theory for this discrepency in re-naming the `_` object correctly is
 
 #### Grunt & Uglify
 A Gruntfile is included to compare minification using Uglify vs the Closure compiler's `ADVANCED_OPTIMIZATIONS` flag. Grunt will produce `js/256/bundle.min.js`, a minified bundle using Uglify.
+
+#### Other Notes
+`js/libs/lib.js` is a small "library" function that implements a `dash` class, which has basic implementations of `map`, `filter`, and `flip`. This smaller file is used to aid in investigating what's happening when code is run through Closure.
