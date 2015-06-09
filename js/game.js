@@ -1,8 +1,11 @@
 /// <reference path="typings/underscore.d.ts" />
+
 var Game = (function () {
     function Game(initBoard) {
         if (initBoard === void 0) { initBoard = '0000202000000000'; }
+        //console.log(initBoard);
         this.board = _.map(initBoard.split(''), function (num) { return parseInt(num); });
+        //console.log(this.board);
     }
     Game.prototype.toString = function () {
         var strBoard = '';
@@ -18,13 +21,16 @@ var Game = (function () {
         var chunked;
         var newBoard;
         if (move === 'up' || move === 'down') {
+            console.log("move(): up and down");
             chunked = [[], [], [], []];
             for (var i = 0; i < this.board.length; i++) {
                 chunked[i % 4].push(this.board[i]);
+                console.log("move(): up and down forloop");
             }
             console.log(chunked);
         }
         else if (move === 'right' || move === 'left') {
+            console.log("move(): right and left");
             var copy = this.board;
             copy = _.map(copy, function (num) { return num; });
             chunked = [];
@@ -58,8 +64,8 @@ var Game = (function () {
     Game.prototype.spawnBlock = function () {
         var zeroes = [];
         var spawn;
-        _.filter(this.board, function (char, index) {
-            if (char === 0) {
+        _.filter(this.board, function (_char, index) {
+            if (_char === 0) {
                 zeroes.push(index);
             }
         });
@@ -75,3 +81,9 @@ var Game = (function () {
 })();
 var game = new Game();
 console.log(game.toString());
+
+window['game'] = game;
+window['game'].move = Game.prototype.move;
+window['game'].spawnBlock = Game.prototype.spawnBlock;
+window['game'].toString = Game.prototype.toString;
+
