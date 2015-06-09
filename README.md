@@ -78,3 +78,5 @@ This allows `_` to correctly refer to the underscore object.
 
 The current theory for this discrepency in re-naming the `_` object correctly is because in `game.js`, functions such as `map` are being called, which are part of the `window` object. They are included in default extern files that ship with Closure compiler. [Externs](https://developers.google.com/closure/compiler/docs/api-tutorial3) are used to communicate what names should not be touched to the Closure Compiler. As such, names such as `map` and `filter` are left untouched even in `ADVANCED_OPTIMIZATIONS`.
 
+#### Grunt & Uglify
+A Gruntfile is included to compare minification using Uglify vs the Closure compiler's `ADVANCED_OPTIMIZATIONS` flag. Grunt will produce `js/256/bundle.min.js`, a minified bundle using Uglify.
