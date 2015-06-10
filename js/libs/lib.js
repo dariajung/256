@@ -1,20 +1,21 @@
 // Small "library" that contains two functions, map and flip (reverse)
 
-var dash = (function() {
+ var dash = (function() {
 
+	/**
+	 * @constructor
+	 */
 	function dash() {};
 
+	/**
+	 * map
+	 * @param {!Function} fn
+	 * @param {!Array} arr
+	 * @return {!Array}
+	 */
 	dash.prototype.map = function(fn, arr) {
 
 		console.log('myMap');
-
-		if (!arr) {
-			return null;
-		}
-
-		if (!fn) {
-			return arr;
-		}
 
 		var len = arr.length;
 		var new_arr = [];
@@ -25,11 +26,13 @@ var dash = (function() {
 		return new_arr;
 	};
 
-	// reverse the given input, assume immutability
+	/**
+	 * @param {Array} arr
+	 * @return {Array}
+	 */
 	dash.prototype.flip = function(arr) {
-		if (!arr) {
-			return null;
-		}
+
+		console.log('flip');
 
 		var rev = [];
 		for (var i = arr.length - 1; i >= 0; i--) {
@@ -43,14 +46,6 @@ var dash = (function() {
 
 		console.log('myFilter');
 
-		if (!arr) {
-			return null;
-		}
-
-		if (!condition) {
-			return arr;
-		}
-
 		var len = arr.length;
 		var ret = [];
 
@@ -63,30 +58,49 @@ var dash = (function() {
 		return ret;
 	}
 
-	// does x exist in arr?
-	dash.prototype.elem = function(x, arr) {
+		/** 
+		 * Checks if x exists in arr
+		 * @param {!number} x The element we are looking for.
+		 * @param {!Array<number>} arr The array we are given to look in.
+		 * @return {boolean} 
+		 */
+		dash.prototype.elem = function(x, arr) {
 
-		if (!arr || x === null) {
-			console.log('null?');
-			return null;
-		}
+			console.log('elem');
+			console.log(x);
+			console.log(arr);
+			var len = arr.length;
+			console.log(len);
 
-		var len = arr.length;
-
-		for (var i = 0; i < len; i++) {
-			if (x === arr[i]) {
-				return true;
+			for (var i = 0; i < len; i++) {
+				if (x === arr[i]) {
+					return true;
+				}
 			}
+
+			return false;
+
 		}
-
-		return false;
-
-	}
 
 	return dash;
+
 })();
 
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+function foo(a, b) {
+  return a - b + 1;
+}
+
 var underscore = new dash();
+
+
+var x = ['kitkat', 'gingerbread', 'lollipop'];
+// this should complain because elem expects two non-nullable parameters
+underscore.elem();
 
 // export so they are not removed by Closure
 window['underscore'] = underscore;
