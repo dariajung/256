@@ -9,6 +9,8 @@
 ├── closure
 │   ├── COPYING
 │   ├── README.md
+│   ├── compiler-ambiguate.jar
+│   ├── compiler-disambiguate.jar
 │   └── compiler.jar
 ├── closure.sh
 ├── index.html
@@ -21,16 +23,23 @@
 │   │   ├── lib.js
 │   │   └── underscore.js
 │   ├── libs
+│   │   ├── dash.js
 │   │   ├── lib.js
+│   │   ├── lib2.js
+│   │   ├── person.closure.js
+│   │   ├── person.js
 │   │   └── underscore.js
 │   ├── test.js
 │   └── typings
 │       └── underscore.d.ts
 └── package.json
+
 ```
 
 #### closure
 The Google Closure compiler. Included for convenience. 
+
+In addition to the default build, there are two custom builds of the closure compiler, `closure/compiler-ambiguate.jar` and `closure/compiler-disambiguate.jar`. These two custom builds specifically enable `ambiguate_properties` and `disambiguate_properties` respectively when `--use_types_for_optimization` is used. By default, both ambiguate and disambiguate are enabled with the `--use_types_for_optimization` flag. While these two are meant to be used together, for exploratory purposes, the goal is to observe the effects of each on their own. 
 
 Flags of interest:
 
