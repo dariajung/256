@@ -1,5 +1,4 @@
-/// <reference path="typings/underscore.d.ts" />
-
+/// <reference path="../typings/underscore.d.ts" />
 class Game {
     board: number[];
 
