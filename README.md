@@ -32,6 +32,14 @@
 #### closure
 The Google Closure compiler. Included for convenience. 
 
+Flags of interest:
+
+- `--variable_renaming_report`: A map of original variable names to new names.
+- `--property_renaming_report`: A map of original property names to new names.
+- `--use_types_for_optimization`: enables both ambiguate and disambiguate
+	- `ambiguate properties`
+	- `disambiguate properties`
+
 #### 256
 256 is a simple clone of the popular 2048 game. The original was written in TypeScript, `game.ts`. `game.js` is "transpiled" from `game.ts` by the TypeScript compiler `tsc`. 
 
